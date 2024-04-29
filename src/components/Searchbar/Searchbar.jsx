@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './Searchbar.styles'
 
-export function Searchbar() {
+export default function Searchbar() {
   return <S.SearchInput/>
 }
