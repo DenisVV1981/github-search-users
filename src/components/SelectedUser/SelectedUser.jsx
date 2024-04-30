@@ -10,8 +10,15 @@ export default function SelectedUser({user}) {
 
   return (
     <S.SelectedUserContainer>
-      {user.login}
-      <img src={user.avatar_url} alt='аватар пользователя'/>
+      <S.SelectedUserHeader>
+        <S.SelectedUserImage src={user.avatar_url} alt='аватар пользователя'/>
+        <S.SelectedUserName>
+          {user.login}
+        </S.SelectedUserName>
+      </S.SelectedUserHeader>
+      <S.SelectedUserInfo>
+        информация пользователя
+      </S.SelectedUserInfo>
     </S.SelectedUserContainer>
   )
 }

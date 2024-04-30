@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { Fragment } from 'react';
+import * as S from './app.styles'
 import './App.css';
-import SearchContainer from './components/SearchContainer/SearchContainer.jsx';
-import SelectedUser from './components/SelectedUser/SelectedUser.jsx';
+import DataContainer from './components/DataContainer/DataContainer.jsx';
+import GlobalStyle from './App.globalstyles.js';
+import Searchbar from './components/Searchbar/Searchbar.jsx';
 
 function App() {
-  const [selectedUser, setSelectedUser] = useState(null);
 
   return (
-    <div className="App">
-      <SearchContainer
-        selectUserCb={setSelectedUser}/>
-      <SelectedUser 
-        user={selectedUser}/>
-    </div>
+    <Fragment>
+      <GlobalStyle/>
+      <Searchbar></Searchbar>
+      <DataContainer/>
+    </Fragment>
   );
 }
 

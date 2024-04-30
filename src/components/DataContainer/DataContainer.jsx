@@ -1,8 +1,8 @@
-import React from 'react';
-import * as S from './SearchContainer.styles'
-import Searchbar from '../Searchbar/Searchbar';
+import React, { useState } from 'react';
+import * as S from './DataContainer.styles'
+import SelectedUser from '../SelectedUser/SelectedUser';
 
-export default function SearchContainer({selectUserCb}) {
+export default function DataContainer({}) {
   const searchResult = [
     {
       "login": "Denisvvht",
@@ -48,18 +48,22 @@ export default function SearchContainer({selectUserCb}) {
     }
   ];
 
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const selectUser = (user) => {
-    selectUserCb(user);
+    setSelectedUser(user);
   }
 
   return (
-    <S.SearchBlock>
-      <Searchbar></Searchbar>
-      {searchResult.map((user)=>{
-        return <div key={user.id} onClick={()=>{selectUser(user)}}>
-          {user.login}
-        </div>
-      })}
-    </S.SearchBlock>
+    <S.ResultContainer > 
+      <S.SelectedUsersList>
+        {searchResult.map((user)=>{
+          return <S.SelectedUserListItem key={user.id} onClick={()=>{selectUser(user)}}>
+            {user.login}
+          </S.SelectedUserListItem>
+        })} 
+      </S.SelectedUsersList>
+      <SelectedUser user={selectedUser}/>
+    </S.ResultContainer>
   )
 }
