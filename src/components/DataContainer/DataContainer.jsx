@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import * as S from './DataContainer.styles'
 import SelectedUser from '../SelectedUser/SelectedUser';
-import { useSearchUsersQuery } from '../../services/githubApi';
+import { useSelector } from 'react-redux';
 
-export default function DataContainer({}) {
-  const {data, isLoading, error} = useSearchUsersQuery();
-  console.log(data);
+export default function DataContainer({data, isLoading}) {
+  const users = useSelector(()=>data?.items);
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -15,14 +14,17 @@ export default function DataContainer({}) {
 
   return (
     <S.ResultContainer > 
-      <S.SelectedUsersList>
-        {data?.items && data.items.map((user)=>{
-          return <S.SelectedUserListItem key={user.id} onClick={()=>{selectUser(user)}}>
-            {user.login}
-          </S.SelectedUserListItem>
-        })} 
-      </S.SelectedUsersList>
-      <SelectedUser user={selectedUser}/>
+      {isLoading && (<div>ждити</div>)}
+      {!isLoading && (<>
+        <S.SelectedUsersList>
+          {users && users.map((user)=>{
+            return <S.SelectedUserListItem key={user.id} onClick={()=>{selectUser(user)}}>
+              {user.login}
+            </S.SelectedUserListItem>
+          })} 
+        </S.SelectedUsersList>
+        <SelectedUser user={selectedUser}/>
+      </>)}
     </S.ResultContainer>
   )
 }
