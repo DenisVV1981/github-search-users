@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import * as S from './app.styles'
 import './App.css';
 import DataContainer from './components/DataContainer/DataContainer.jsx';
 import GlobalStyle from './App.globalstyles.js';

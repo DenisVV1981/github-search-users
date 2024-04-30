@@ -1,52 +1,11 @@
 import React, { useState } from 'react';
 import * as S from './DataContainer.styles'
 import SelectedUser from '../SelectedUser/SelectedUser';
+import { useSearchUsersQuery } from '../../services/githubApi';
 
 export default function DataContainer({}) {
-  const searchResult = [
-    {
-      "login": "Denisvvht",
-      "id": 168023561,
-      "node_id": "U_kgDOCgPWCQ",
-      "avatar_url": "https://avatars.githubusercontent.com/u/168023561?v=4",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/Denisvvht",
-      "html_url": "https://github.com/Denisvvht",
-      "followers_url": "https://api.github.com/users/Denisvvht/followers",
-      "following_url": "https://api.github.com/users/Denisvvht/following{/other_user}",
-      "gists_url": "https://api.github.com/users/Denisvvht/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/Denisvvht/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/Denisvvht/subscriptions",
-      "organizations_url": "https://api.github.com/users/Denisvvht/orgs",
-      "repos_url": "https://api.github.com/users/Denisvvht/repos",
-      "events_url": "https://api.github.com/users/Denisvvht/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/Denisvvht/received_events",
-      "type": "User",
-      "site_admin": false,
-      "score": 1.0
-    },
-    {
-      "login": "denisvvf",
-      "id": 77418157,
-      "node_id": "MDQ6VXNlcjc3NDE4MTU3",
-      "avatar_url": "https://avatars.githubusercontent.com/u/77418157?v=4",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/denisvvf",
-      "html_url": "https://github.com/denisvvf",
-      "followers_url": "https://api.github.com/users/denisvvf/followers",
-      "following_url": "https://api.github.com/users/denisvvf/following{/other_user}",
-      "gists_url": "https://api.github.com/users/denisvvf/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/denisvvf/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/denisvvf/subscriptions",
-      "organizations_url": "https://api.github.com/users/denisvvf/orgs",
-      "repos_url": "https://api.github.com/users/denisvvf/repos",
-      "events_url": "https://api.github.com/users/denisvvf/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/denisvvf/received_events",
-      "type": "User",
-      "site_admin": false,
-      "score": 1.0
-    }
-  ];
+  const {data, isLoading, error} = useSearchUsersQuery();
+  console.log(data);
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -57,7 +16,7 @@ export default function DataContainer({}) {
   return (
     <S.ResultContainer > 
       <S.SelectedUsersList>
-        {searchResult.map((user)=>{
+        {data?.items && data.items.map((user)=>{
           return <S.SelectedUserListItem key={user.id} onClick={()=>{selectUser(user)}}>
             {user.login}
           </S.SelectedUserListItem>
