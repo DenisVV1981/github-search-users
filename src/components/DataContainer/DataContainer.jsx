@@ -3,8 +3,10 @@ import * as S from './DataContainer.styles'
 import SelectedUser from '../SelectedUser/SelectedUser';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function DataContainer({data, isLoading}) {
-  const users = useSelector(()=>data?.items);
+export default function DataContainer({data, isLoading, startRowNumber = 1}) {
+  const users = useSelector(()=>
+    data?.items.map((user) => {return {...user, rowNumber: startRowNumber++}})
+  );
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -14,7 +16,7 @@ export default function DataContainer({data, isLoading}) {
 
   return (
     <>
-      {!isLoading && (<S.TotalUsersCount>Найдено: {data?.total_count ?? 0} пользователей.</S.TotalUsersCount>)}
+      {!isLoading && (<S.TotalUsersCount>Найдено: {data?.total_count ?? 0} пользователей (доступно к просмотру максимум 1000 пользоватей).</S.TotalUsersCount>)}
       <S.ResultContainer > 
         {isLoading && (<div>ждити</div>)}
         {!isLoading && (<>
@@ -23,12 +25,12 @@ export default function DataContainer({data, isLoading}) {
             {users && users.map((user)=>{
               if(selectedUser && user.id === selectedUser.id){
                 return <S.SelectedUserListItemCurrent key={user.id}>
-                  {user.login}
+                  {user.rowNumber}. {user.login}
                 </S.SelectedUserListItemCurrent>
               }
               else{
                 return <S.SelectedUserListItem key={user.id} onClick={()=>{selectUser(user)}}>
-                  {user.login}
+                {user.rowNumber}. {user.login}
                 </S.SelectedUserListItem>
               }
             })} 
