@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import * as S from './Searchbar.styles'
 
-export default function Searchbar({searchChangedCb}) {
+export default function Searchbar({searchChangedCb, totalItems}) {
   const [value, setValue] = useState('');
   const [pageSize, setPageSize] = useState(5);
   const [pageNumber, setPageNumber] = useState(1);
+  
+  const pageSizes = [1, 2, 5, 10, 20, 30].filter((item)=>totalItems<0 || item <=(totalItems*2));
 
   const callUpdate= (pattern, pageSize, pageNumber)=>{
     if(value.length < 2){
@@ -36,7 +38,7 @@ export default function Searchbar({searchChangedCb}) {
       <S.PagerBar>
         <S.Pager>
           <S.PagerText>Размер страницы: </S.PagerText>
-          {[1, 2, 5, 10, 20, 30].map((size)=>{
+          {pageSizes.map((size)=>{
             if(size === pageSize){
               return <S.PageNumbersSelected onClick={()=>handleChangePageSize(size)}>{size}</S.PageNumbersSelected>;
             }

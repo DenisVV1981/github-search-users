@@ -14,3 +14,10 @@ padding-left: 40px;
 export const SelectedUserListItem= styled.li`
 
 `
+
+export const SelectedUserListItemCurrent= styled.li`
+color: grey;
+`
+export const TotalUsersCount= styled.div`
+
+`

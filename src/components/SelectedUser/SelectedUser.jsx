@@ -7,13 +7,12 @@ export default function SelectedUser({user}) {
     return (<>Пользователь не выбран</>);
   }
 
-
   return (
     <S.SelectedUserContainer>
       <S.SelectedUserHeader>
         <S.SelectedUserImage src={user.avatar_url} alt='аватар пользователя'/>
-        <S.SelectedUserName>
-          {user.login}
+        <S.SelectedUserName href={user.html_url} target="_blank"> 
+          {user.login} 
         </S.SelectedUserName>
       </S.SelectedUserHeader>
       <S.SelectedUserInfo>

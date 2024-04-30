@@ -28,7 +28,8 @@ export const PagerBar= styled.div`
 export const Pager= styled.div`
 display: flex;
 flex-direction: row;
-justify-content: space-evenly;
+justify-content: flex-start;
+gap: 15px;
 `
 export const PageNumbers= styled.div`
 border-radius: 12px;

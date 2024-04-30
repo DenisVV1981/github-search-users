@@ -15,7 +15,7 @@ function App() {
   return (
     <Fragment>
       <GlobalStyle/>
-      <Searchbar searchChangedCb={handleChangeSearch}></Searchbar>
+      <Searchbar searchChangedCb={handleChangeSearch} totalItems={data?.total_count??-1}></Searchbar>
       <DataContainer data={data} isLoading={isLoading}/>
     </Fragment>
   );
