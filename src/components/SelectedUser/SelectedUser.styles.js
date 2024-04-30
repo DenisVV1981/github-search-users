@@ -21,7 +21,7 @@ width: 50px;
 border-radius: 25px;
 border: 2px solid black
 `
-export const SelectedUserName= styled.h3`
+export const SelectedUserName= styled.a`
 font-size: 20px;
 font-family: Roboto;
 `
