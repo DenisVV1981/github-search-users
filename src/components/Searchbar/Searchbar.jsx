@@ -3,7 +3,7 @@ import * as S from './Searchbar.styles'
 
 export default function Searchbar({searchChangedCb, totalItems}) {
   const [value, setValue] = useState('');
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const [customPageNumber, setCustomPageNumber] = useState('');
   
@@ -11,7 +11,7 @@ export default function Searchbar({searchChangedCb, totalItems}) {
   {
     totalItems = 1000;
   }
-  
+
   const pageSizes = [10, 20, 30].filter((item)=>item <=(totalItems*2));
 
   const callUpdate= (pattern, pageSize, pageNumber)=>{
@@ -81,42 +81,45 @@ export default function Searchbar({searchChangedCb, totalItems}) {
           <S.PagerText>Размер страницы: </S.PagerText>
           {pageSizes.map((size)=>{
             if(size === pageSize){
-              return <S.PageNumbersSelected onClick={()=>handleChangePageSize(size)}>{size}</S.PageNumbersSelected>;
+              return <S.PageButtonSelected>{size}</S.PageButtonSelected>;
             }
             else{
-              return <S.PageNumbers onClick={()=>handleChangePageSize(size)}>{size}</S.PageNumbers>;
+              return <S.PageButton onClick={()=>handleChangePageSize(size)}>{size}</S.PageButton>;
             }
           })}
         </S.Pager>
       
       </S.PagerBar>
-      <div>
-        <div>
+      <S.PageCounter>
+        <S.PageCounterText>
           Номер страницы: 
+        </S.PageCounterText>
+        <S.PageCounterNumbers>
           {pageNumbers.map((page) => {
             if(page === pageNumber){
-              return <span key={"pagebutton"+page}>{page}</span>
+              return <S.PageButtonSelected key={"pagebutton"+page}>{page}</S.PageButtonSelected>
             }
             else{
-              return <button key={"pagebutton"+page} onClick={()=>{handleChangePageNumber(page)}}>{page}</button>
+              return <S.PageButton key={"pagebutton"+page} onClick={()=>{handleChangePageNumber(page)}}>{page}</S.PageButton>
             }
-          })} 
-          {maximumPageNumber > 10 && (
-            <div>
-              Слишком много страниц выберете вручную
-              <input 
-                value={customPageNumber} onInput={e => setCustomPageNumber(e.target.value)}
-                onKeyUp={handleCustomPageNumberKeyUp}
-                type="search"
-                placeholder="Введите номер нужной страницы"
-                name="customNumberSearch"/>
-            </div>
-          )}
-        </div>
-        <div>
-          Всего страниц: {maximumPageNumber}
-        </div>
+          })}
+        </S.PageCounterNumbers>
+      </S.PageCounter> 
+      {maximumPageNumber > 10 && (
+        <S.PageCounterNumbersExtra> 
+          Слишком много страниц выберете вручную
+          <input 
+            value={customPageNumber} onInput={e => setCustomPageNumber(e.target.value)}
+            onKeyUp={handleCustomPageNumberKeyUp}
+            type="search"
+            placeholder="Введите номер 0-100"
+            name="customNumberSearch"/>
+        </S.PageCounterNumbersExtra>
+      )}
+      <div>
+        Всего страниц: {maximumPageNumber}
       </div>
+    
       
     </S.SearchbarContainer>
   )

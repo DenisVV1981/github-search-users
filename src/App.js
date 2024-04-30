@@ -17,6 +17,7 @@ function App() {
   return (
     <Fragment>
       <GlobalStyle/>
+      <h1>Поиск пользователей GitHub.</h1>
       <Searchbar searchChangedCb={handleChangeSearch} totalItems={data?.total_count??-1}></Searchbar>
       <DataContainer data={data} isLoading={isLoading} startRowNumber={startRowNumber}/>
     </Fragment>
