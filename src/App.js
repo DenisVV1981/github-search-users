@@ -3,7 +3,6 @@ import './App.css';
 import DataContainer from './components/DataContainer/DataContainer.jsx';
 import GlobalStyle from './App.globalstyles.js';
 import Searchbar from './components/Searchbar/Searchbar.jsx';
-import { useLazySearchUsersQuery } from './services/githubApi.js';
 
 function App() {
   const [startRowNumber, setStartRowNumber] = useState(null);
@@ -18,12 +17,12 @@ function App() {
   };
 
   return (
-    <Fragment>
+    <>
       <GlobalStyle/>
       <h1>Поиск пользователей GitHub.</h1>
       <Searchbar searchChangedCb={handleChangeSearch} totalItems={data?.total_count??-1}></Searchbar>
       <DataContainer data={data} isLoading={isLoading} startRowNumber={startRowNumber}/>
-    </Fragment>
+    </>
   );
 }
 
