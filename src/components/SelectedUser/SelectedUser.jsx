@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import * as S from './SelectedUser.styles'
+import { useLazySearchUserFollowersQuery, useLazySearchUserSubscriptionsQuery, useLazySearchUserRepositoriesQuery } from '../../services/githubApi';
+import { useDispatch } from 'react-redux';
 
 export default function SelectedUser({user}) {
+  const [getRepositoriesList,{data:repositoriesList, isLoading:repositoriesIsLoading}] = useLazySearchUserRepositoriesQuery();
+  const [getUserFollowers,{data:followersList, isLoading:followersIsLoading}] = useLazySearchUserFollowersQuery();
+  const [getUserSubscriptions,{data:subscriptionsList, isLoading:subscriptionsIsLoading}] = useLazySearchUserSubscriptionsQuery();
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(()=>{
+      if(user !==null)  
+      {
+        getRepositoriesList({login: user.login});
+        getUserFollowers({login: user.login});
+        getUserSubscriptions({login: user.login});
+      }
+    });
+    console.log(user);
+  }, [user]);
+
+  
   if (!user)
   {
     return (<>Пользователь не выбран</>);
   }
-
+  
   return (
     <S.SelectedUserContainer>
       <S.SelectedUserHeader>
@@ -16,7 +36,19 @@ export default function SelectedUser({user}) {
         </S.SelectedUserName>
       </S.SelectedUserHeader>
       <S.SelectedUserInfo>
-        информация пользователя
+        Информация о пользователя:
+        {(repositoriesIsLoading || followersIsLoading || subscriptionsIsLoading) && (<>Загружаем данные</>)}
+        {!repositoriesIsLoading && !followersIsLoading && !subscriptionsIsLoading && (<>
+          <div>
+            Количество репозиториев: {repositoriesList?.length??0}
+          </div>
+          <div>
+            Количество подписок: {subscriptionsList?.length??0}
+          </div>
+          <div>
+            Количество подписчиков: {followersList?.length??0}
+          </div>
+        </>)}
       </S.SelectedUserInfo>
     </S.SelectedUserContainer>
   )
