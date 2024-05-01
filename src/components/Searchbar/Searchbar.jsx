@@ -22,7 +22,7 @@ export default function Searchbar({searchChangedCb, }) {
       }
       searchUsers({pattern: pattern, per_page:pageSize, page: pageNumber, order: order});
     });
-  }, [pattern, pageSize, pageNumber, customPageNumber, order]);
+  }, [pattern, pageSize, pageNumber, customPageNumber, order, dispatch, searchUsers]);
 
   useEffect(() => {
     searchChangedCb(data, isLoading, (pageNumber-1)*pageSize + 1);
@@ -39,7 +39,7 @@ export default function Searchbar({searchChangedCb, }) {
       setPageSizes([]);
       setTotalItems(0);
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, pageNumber, pageSize, searchChangedCb]);
 
   const handlePatternKeyUp = () => {
     setCustomPageNumber('');

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import * as S from './SelectedUser.styles'
 import { useLazySearchUserFollowersQuery, useLazySearchUserSubscriptionsQuery, useLazySearchUserRepositoriesQuery } from '../../services/githubApi';
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ export default function SelectedUser({user}) {
       }
     });
     console.log(user);
-  }, [user]);
+  }, [dispatch, getRepositoriesList, getUserFollowers, getUserSubscriptions, user]);
 
   
   if (!user)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './DataContainer.styles'
 import SelectedUser from '../SelectedUser/SelectedUser';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function DataContainer({data, isLoading, startRowNumber = 1}) {
   const users = useSelector(()=>
