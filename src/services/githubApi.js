@@ -7,8 +7,6 @@ const baseQueryWithErrorHandling = async (args, api, extraOptions) => {
   
   // Делаем запрос
   const result = await baseQuery(args, api, extraOptions)
-  console.debug('Результат первого запроса', { result })
-  
   if (result?.error?.status === 403) {
     alert("403 ошибка - лимит на использование АПИ");
     return null;
@@ -17,9 +15,6 @@ const baseQueryWithErrorHandling = async (args, api, extraOptions) => {
   return result
   }
   
-  
-  
-
 export const githubApi = createApi({
   reducerPath: 'githubApi',
   baseQuery: baseQueryWithErrorHandling,
@@ -33,7 +28,6 @@ export const githubApi = createApi({
         order="asc"}
       ) => `/search/users?q=${pattern}&sort=${sort}&order=${order}&per_page=${per_page}&page=${page}`,
       transformResponse: (response) => {
-        console.log(response);
         return response;
       },
     })
