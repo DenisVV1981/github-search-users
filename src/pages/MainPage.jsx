@@ -16,7 +16,10 @@ export const MainPage = ()=> {
 
   return (
     <>
-      <h1>Поиск пользователей GitHub.</h1>
+      <h1 
+      style={{ backgroundColor:"lightgray", padding: "15px"}}>
+      Поиск пользователей GitHub.
+      </h1>
       <Searchbar searchChangedCb={handleChangeSearch} totalItems={data?.total_count??-1}></Searchbar>
       <DataContainer data={data} isLoading={isLoading} startRowNumber={startRowNumber}/>
     </>

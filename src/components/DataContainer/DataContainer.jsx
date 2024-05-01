@@ -18,7 +18,7 @@ export default function DataContainer({data, isLoading, startRowNumber = 1}) {
     <>
       {!isLoading && (<S.TotalUsersCount>Найдено: {data?.total_count ?? 0} пользователей (доступно к просмотру максимум 1000 пользоватей).</S.TotalUsersCount>)}
       <S.ResultContainer > 
-        {isLoading && (<div>ждити</div>)}
+        {isLoading && (<div>Загрузка данных</div>)}
         {!isLoading && (<>
           
           <S.SelectedUsersList>

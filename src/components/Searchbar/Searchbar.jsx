@@ -130,7 +130,7 @@ export default function Searchbar({searchChangedCb, }) {
         </S.PageCounter> 
         {maximumPageNumber > 10 && (
           <S.PageCounterNumbersExtra> 
-            Слишком много страниц выберете вручную
+            Слишком много страниц выберите вручную
             <input 
               value={customPageNumber} onInput={e => setCustomPageNumber(e.target.value)}
               onKeyUp={handleCustomPageNumberKeyUp}

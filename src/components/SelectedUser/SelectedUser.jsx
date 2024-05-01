@@ -36,17 +36,19 @@ export default function SelectedUser({user}) {
         </S.SelectedUserName>
       </S.SelectedUserHeader>
       <S.SelectedUserInfo>
-        Информация о пользователя:
+        <S.SelectedUserInfoHeader>
+          Информация о пользователe:
+        </S.SelectedUserInfoHeader>
         {(repositoriesIsLoading || followersIsLoading || subscriptionsIsLoading) && (<>Загружаем данные</>)}
         {!repositoriesIsLoading && !followersIsLoading && !subscriptionsIsLoading && (<>
           <div>
-            Количество репозиториев: {repositoriesList?.length??0}
+            Количество репозиториев: {repositoriesList?.length?? "-"}
           </div>
           <div>
-            Количество подписок: {subscriptionsList?.length??0}
+            Количество подписок: {subscriptionsList?.length?? "-"}
           </div>
           <div>
-            Количество подписчиков: {followersList?.length??0}
+            Количество подписчиков: {followersList?.length?? "-"}
           </div>
         </>)}
       </S.SelectedUserInfo>

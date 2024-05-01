@@ -29,4 +29,12 @@ export const SelectedUserInfo= styled.div`
 flex-grow: 1;
 background-color: cornsilk;
 padding: 15px;
+display: flex;
+flex-direction: column;
+gap: 10px;
 `
+export const SelectedUserInfoHeader= styled.div`
+font-size: 20px;
+`
+
+
