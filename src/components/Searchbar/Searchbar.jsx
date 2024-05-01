@@ -27,12 +27,12 @@ export default function Searchbar({searchChangedCb, }) {
   useEffect(() => {
     searchChangedCb(data, isLoading, (pageNumber-1)*pageSize + 1);
 
-    if(data===undefined){
+    if(data === undefined){
       return;
     }
 
-    if(data!=null){
-      let itemsCount = data.total_count > 1000 ? 1000: data.total_items;
+    if(data != null && data.total_count > 0){
+      let itemsCount = data.total_count > 1000 ? 1000: data.total_count;
       setPageSizes([10, 20, 30].filter((item)=>item <=(itemsCount*2)));
       setTotalItems(itemsCount);
     }else{
@@ -65,7 +65,6 @@ export default function Searchbar({searchChangedCb, }) {
     }
 
     maximumPageNumber = Math.floor(totalItems / pageSize) + ((totalItems % pageSize) > 0 ? 1 : 0);
-    console.log(maximumPageNumber);
     if(maximumPageNumber < pageNumber){
       setPageNumber(1);
     }else{
@@ -80,7 +79,6 @@ export default function Searchbar({searchChangedCb, }) {
       alert("Вы ввели слишком большой номер страницы. Мы сбросили до максимума: " + maximumPageNumber);
       setCustomPageNumber(maximumPageNumber);
       setPageNumber(maximumPageNumber);
-      //callUpdate(value, pageSize, maximumPageNumber);
       return;
     }
     setPageNumber(customPageNumber);
