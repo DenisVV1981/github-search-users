@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/denisvv1981.github.io/github-search-users/static/css/main.26f99641.css",
-    "main.js": "/denisvv1981.github.io/github-search-users/static/js/main.df842096.js",
-    "index.html": "/denisvv1981.github.io/github-search-users/index.html",
-    "main.26f99641.css.map": "/denisvv1981.github.io/github-search-users/static/css/main.26f99641.css.map",
-    "main.df842096.js.map": "/denisvv1981.github.io/github-search-users/static/js/main.df842096.js.map"
+    "main.css": "/static/css/main.26f99641.css",
+    "main.js": "/static/js/main.61cdc230.js",
+    "index.html": "/index.html",
+    "main.26f99641.css.map": "/static/css/main.26f99641.css.map",
+    "main.61cdc230.js.map": "/static/js/main.61cdc230.js.map"
   },
   "entrypoints": [
     "static/css/main.26f99641.css",
-    "static/js/main.df842096.js"
+    "static/js/main.61cdc230.js"
   ]
 }
