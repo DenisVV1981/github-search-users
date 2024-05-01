@@ -8,7 +8,7 @@ const baseQueryWithErrorHandling = async (args, api, extraOptions) => {
   // Делаем запрос
   const result = await baseQuery(args, api, extraOptions)
   if (result?.error?.status === 403) {
-    alert("403 ошибка - лимит на использование АПИ");
+    console.error("403 ошибка - лимит на использование АПИ");
     return null;
   }
   
@@ -30,6 +30,24 @@ export const githubApi = createApi({
       transformResponse: (response) => {
         return response;
       },
+    }),
+    searchUserRepositories: builder.query({
+      query: ({login}) => `/users/${login}/repos`,
+      transformResponse: (response) => {
+        return response;
+      },
+    }),
+    searchUserFollowers: builder.query({
+      query: ({login}) => `/users/${login}/followers`,
+      transformResponse: (response) => {
+        return response;
+      },
+    }),
+    searchUserSubscriptions: builder.query({
+      query: ({login}) => `/users/${login}/subscriptions`,
+      transformResponse: (response) => {
+        return response;
+      },
     })
   }),
 });
@@ -38,4 +56,7 @@ export const githubApi = createApi({
 export const { 
   useSearchUsersQuery,
   useLazySearchUsersQuery,
+  useLazySearchUserRepositoriesQuery,
+  useLazySearchUserFollowersQuery,
+  useLazySearchUserSubscriptionsQuery,
  } = githubApi;

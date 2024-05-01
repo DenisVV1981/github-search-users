@@ -12,7 +12,7 @@ export default function Searchbar({searchChangedCb, }) {
   const [customPageNumber, setCustomPageNumber] = useState('');
   const [order, setOrder] = useState('desc');
   const [pageSizes, setPageSizes] = useState([]);
-  const [totalItems, setTotalItems] = useState(0)
+  const [totalItems, setTotalItems] = useState(0);
   const dispatch = useDispatch();
   
   useEffect(() => {
