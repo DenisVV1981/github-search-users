@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './Searchbar.styles'
 import SortOrder from '../SortOrder/SortOrder';
 import { useDispatch } from 'react-redux';
 import { useLazySearchUsersQuery } from '../../services/githubApi';
 
 export default function Searchbar({searchChangedCb, }) {
-  const [searchUsers, {data, isLoading, error}] = useLazySearchUsersQuery();
+  const [searchUsers, {data, isLoading}] = useLazySearchUsersQuery();
   const [pattern, setPattern] = useState('');
   const [pageSize, setPageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
@@ -82,7 +82,6 @@ export default function Searchbar({searchChangedCb, }) {
       return;
     }
     setPageNumber(customPageNumber);
-    //callUpdate(value, pageSize, customPageNumber);
   };
 
   return (
@@ -95,7 +94,7 @@ export default function Searchbar({searchChangedCb, }) {
           placeholder="Поиск (от 3 символов)"
           name="search"/>
       </S.SearhBar>
-      {(pattern?.length??0)>3 && (<><SortOrder 
+      {(pattern?.length??0)>=3 && (<><SortOrder 
           currentOrder={order}
           changeOrderCb={handleOrderChange}
           description="Сортировка репозиториев"
