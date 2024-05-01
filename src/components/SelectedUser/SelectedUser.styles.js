@@ -5,7 +5,7 @@ display: flex;
 flex-direction: column;
 border: 1px solid blue;
 height: 250px;
-width: 250px;
+min-width: 250px;
 `
 export const SelectedUserHeader= styled.div`
 display: flex;

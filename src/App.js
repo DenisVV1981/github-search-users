@@ -6,12 +6,15 @@ import Searchbar from './components/Searchbar/Searchbar.jsx';
 import { useLazySearchUsersQuery } from './services/githubApi.js';
 
 function App() {
-  const [searchUsers, {data, isLoading, error}] = useLazySearchUsersQuery();
   const [startRowNumber, setStartRowNumber] = useState(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
-  const handleChangeSearch = (pattern, pageSize, pageNumber) => {
-    searchUsers({pattern, per_page:pageSize, page: pageNumber});
-    setStartRowNumber( (pageNumber-1)*pageSize + 1);
+
+  const handleChangeSearch = (newData, newIsLoading, newStartRowNumber) => {
+    setData(newData);
+    setIsLoading(newIsLoading);
+    setStartRowNumber( newStartRowNumber);
   };
 
   return (
